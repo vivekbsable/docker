@@ -30,3 +30,27 @@ Containers run in isolated environments, meaning they don’t expose their inter
 In this example, Django app inside the container is running on port 8000, then:
 Without -p 8000:8000, you cannot access it from your host machine.
 With -p 8000:8000, you can access it by visiting http://localhost:8000 on your browser.
+
+
+## 3. How to pass and use arguments in Container
+    We can pass parameters to a Docker container in multiple ways and access in your code(Python)
+
+### Pass as Command-Line Arguments
+I can pass parameters as arguments when running the container and read them using sys.argv in Python.
+In Docker, both CMD and ENTRYPOINT define how a container runs.
+However, wheb passing positional arguments, ENTRYPOINT is preferred because it ensure all arguments are treated as part of the command execution.
+
+### Pass as Environemnt Variable
+Use -e to pass environment variable when runiing the container
+
+### Use Dockerfile ENV Veraibles
+I can define default environemnt veraible in a Dockerfile.
+
+    ENV IMAGE_NAME="vivekbsable/container_with_arguments"
+
+### Command
+1. Positional Arguments: 10 20
+2. Keyword Arguments: name, surname
+3. Envrionemnt Variable: SCRIPT_LANG, MY_DOCKERFILE_ENV_02
+
+    docker run -it -e SCRIPT_LANG="Python" -e MY_DOCKERFILE_ENV_02="Overwrite by command line" -t vivekbsable/container_with_arguments:latest 10 20 --name Vivek --surname Sable
