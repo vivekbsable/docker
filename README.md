@@ -76,23 +76,29 @@ Anything is crrated on local or container mount directories, will be synch to ea
 Volums are completely manged by Docker.
 We can manage lifecycle of Volumes.
 
-List the volumes (Driver, Volume Name)
+### List the volumes (Driver, Volume Name)
 
     docker volume ls
 
-Create Volume
-create logical partition on file system which we can not see direclty.
+### Create Volume
+Create logical partition on file system which we can not see direclty.
 
     docker volume create <volume_name>
 
-We can use created volumn across multiple containers
-
-Details of volume
+### Details of volume
 
     docker volume inspect <volume_name>
 
-Check Driver and Moutpoint and name.
+Check Driver, Moutpoint and name.
 
-Delete Volume
+### Delete Volume
 
     docker volume rm <volume_name>
+
+
+### Docker run
+
+    docker run -it -v <volume_name>:<target dir> -t <image_name>
+
+    docker volume create app_test
+    docker run -it -v app_test:/app/data/logs -t <image_name>
