@@ -53,4 +53,46 @@ I can define default environemnt veraible in a Dockerfile.
 2. Keyword Arguments: `name, surname`
 3. Envrionemnt Variable: `SCRIPT_LANG, MY_DOCKERFILE_ENV_02`
 
-`docker run -it -e SCRIPT_LANG="Python" -e MY_DOCKERFILE_ENV_02="Overwrite by command line" -t vivekbsable/container_with_arguments:latest 10 20 --name Vivek --surname Sable`
+    docker run -it -e SCRIPT_LANG="Python" -e MY_DOCKERFILE_ENV_02="Overwrite by command line" -t vivekbsable/container_with_arguments:latest 10 20 --name Vivek --surname Sable
+
+
+## 4. Docker Bind Mounts
+Container file system is not not persistent. Container can not read or load file on host operating file system.
+Mounting folder from container to host machine. Both folders are synch together.
+We can attach same mount directory with other container.
+
+
+### Comnands
+
+Mount the ./data/directory from your local machine to /data inside the container.
+
+    docker run -v src:dest -t <image_name>
+    docker run -v $(pwd)/data/logs:/app/data/logs -t <image_name>
+
+Anything is crrated on local or container mount directories, will be synch to eachother.
+
+
+## 5. Docker Volume
+Volums are completely manged by Docker.
+We can manage lifecycle of Volumes.
+
+List the volumes (Driver, Volume Name)
+
+    docker volume ls
+
+Create Volume
+create logical partition on file system which we can not see direclty.
+
+    docker volume create <volume_name>
+
+We can use created volumn across multiple containers
+
+Details of volume
+
+    docker volume inspect <volume_name>
+
+Check Driver and Moutpoint and name.
+
+Delete Volume
+
+    docker volume rm <volume_name>
